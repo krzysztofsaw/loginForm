@@ -1,4 +1,3 @@
-/* Center the login container */
 .login-container {
     display: flex;
     flex-direction: column;
@@ -8,7 +7,6 @@
     background-color: #f9f9f9;
 }
 
-/* Style the form */
 form {
     display: flex;
     flex-direction: column;
@@ -19,47 +17,22 @@ form {
     background-color: #fff;
 }
 
-/* Grouping form fields */
 .form-group {
     display: flex;
     flex-direction: column;
     margin-bottom: 15px;
 }
 
-/* Style the labels */
 label {
     margin-bottom: 5px;
     font-size: 14px;
     color: #555;
 }
 
-/* Style the inputs */
 input {
     margin-bottom: 5px;
     padding: 10px;
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 5px;
-}
-
-/* Style the error messages */
-.error {
-    color: red;
-    font-size: 12px;
-    margin-top: 2px; /* Space between the input and error */
-}
-
-/* Style the button */
-button {
-    padding: 10px;
-    font-size: 16px;
-    color: #fff;
-    background-color: #007bff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #0056b3;
 }

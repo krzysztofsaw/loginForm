@@ -1,28 +1,46 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import {
+  AbstractControl,
   FormBuilder,
   FormControl,
   ReactiveFormsModule,
+  ValidationErrors,
   Validators,
 } from '@angular/forms';
+import { TextInputErrorComponent } from '../shared/components/text-input-error/text-input-error.component';
+import { AuthService } from '../core/services/auth.service';
 
 @Component({
   selector: 'app-login-form',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, TextInputErrorComponent],
   templateUrl: './login-form.component.html',
   styleUrl: './login-form.component.scss',
 })
 export class LoginFormComponent {
   private fb = inject(FormBuilder);
+  private authService = inject(AuthService);
 
-  loginFailed = false;
+  public loginSuccess = signal<boolean>(false);
 
   public loginForm = this.fb.group({
-    username: new FormControl('', [Validators.required]),
-    password: new FormControl('', [Validators.required]),
+    email: new FormControl<string>('', [
+      Validators.required,
+      this.emailValidator,
+    ]),
+    password: new FormControl<string>('', [Validators.required]),
   });
 
-  public onSubmit() {
-    // Check if the form is valid
+  public emailValidator(control: AbstractControl): ValidationErrors | null {
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    const valid = emailPattern.test(control.value);
+    return valid ? null : { invalidEmail: true };
+  }
+
+  public onSubmit(): void {
+    if (this.loginForm.valid) {
+      const { email, password } = this.loginForm.value;
+      this.authService.login(email!, password!);
+      this.loginSuccess.set(true);
+    }
   }
 }

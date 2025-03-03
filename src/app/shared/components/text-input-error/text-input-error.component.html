@@ -1,0 +1,5 @@
+@if (control?.invalid && control?.touched) {
+  @for (errorMessage of errorMessages(); track errorMessage) {
+    <div class="error">{{ errorMessage }}</div>
+  }
+}
