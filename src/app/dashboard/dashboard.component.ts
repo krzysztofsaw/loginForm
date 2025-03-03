@@ -1,7 +1,8 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, inject, OnInit } from '@angular/core';
 import { AuthService } from '../core/services/auth.service';
 import { User } from '../models/user.model';
+import { UserService } from '../core/services/user.service';
+import { catchError, of, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,14 +11,27 @@ import { User } from '../models/user.model';
 })
 export class DashboardComponent implements OnInit {
   private authService = inject(AuthService);
-  private http = inject(HttpClient);
+  private userService = inject(UserService);
 
   public userData: User | null = null;
 
   public ngOnInit(): void {
-    this.http.get<User>('/assets/user.json').subscribe((data) => {
-      this.userData = data;
-    });
+    const email = this.authService.getUserEmail();
+    if (email) {
+      this.userService
+        .getUserByEmail(email)
+        .pipe(
+          switchMap((user) => {
+            this.userData = user || null;
+            return of(user);
+          }),
+          catchError((error) => {
+            console.error('Error loading user data', error);
+            return of(null);
+          }),
+        )
+        .subscribe();
+    }
   }
 
   public logout(): void {

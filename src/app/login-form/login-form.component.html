@@ -29,7 +29,7 @@
     <button type="submit" [disabled]="loginForm.invalid">Login</button>
   </form>
 
-  @if (loginFailed) {
+  @if (loginFailed()) {
     <div class="error">Invalid username or password.</div>
   }
 </div>

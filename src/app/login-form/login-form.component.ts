@@ -20,7 +20,7 @@ export class LoginFormComponent {
   private fb = inject(FormBuilder);
   private authService = inject(AuthService);
 
-  public loginSuccess = signal<boolean>(false);
+  public loginFailed = signal<boolean>(false);
 
   public loginForm = this.fb.group({
     email: new FormControl<string>('', [
@@ -36,11 +36,18 @@ export class LoginFormComponent {
     return valid ? null : { invalidEmail: true };
   }
 
-  public onSubmit(): void {
+  onSubmit(): void {
     if (this.loginForm.valid) {
-      const { email, password } = this.loginForm.value;
-      this.authService.login(email!, password!);
-      this.loginSuccess.set(true);
+      const email = this.loginForm.get('email')?.value;
+      const password = this.loginForm.get('password')?.value;
+
+      if (email && password) {
+        this.authService.login(email, password).subscribe((userExists) => {
+          if (!userExists) {
+            this.loginFailed.set(true);
+          }
+        });
+      }
     }
   }
 }
