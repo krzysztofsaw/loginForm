@@ -36,7 +36,7 @@ export class LoginFormComponent {
     return valid ? null : { invalidEmail: true };
   }
 
-  onSubmit(): void {
+  public onSubmit(): void {
     if (this.loginForm.valid) {
       const email = this.loginForm.get('email')?.value;
       const password = this.loginForm.get('password')?.value;
