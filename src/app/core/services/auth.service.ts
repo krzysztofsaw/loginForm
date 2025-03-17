@@ -7,8 +7,8 @@ import { UserService } from './user.service';
   providedIn: 'root',
 })
 export class AuthService {
-  private router = inject(Router);
-  private userService = inject(UserService);
+  private router: Router = inject(Router);
+  private userService: UserService = inject(UserService);
 
   private readonly tokenKey = 'authToken';
   private readonly emailKey = 'userEmail';

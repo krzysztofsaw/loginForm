@@ -14,7 +14,7 @@ import { AbstractControl, ValidationErrors } from '@angular/forms';
   templateUrl: './text-input-error.component.html',
 })
 export class TextInputErrorComponent implements OnInit {
-  private destroyRef = inject(DestroyRef);
+  private destroyRef: DestroyRef = inject(DestroyRef);
 
   @Input() public control: AbstractControl | null = null;
   @Input() public label = '';
@@ -45,7 +45,7 @@ export class TextInputErrorComponent implements OnInit {
       invalidEmail: `Invalid ${this.label.toLowerCase()} address`,
     };
 
-    const messages = Object.keys(errors).map(
+    const messages: string[] = Object.keys(errors).map(
       (errorKey) =>
         errorMessagesMap[errorKey] ||
         `${this.label} has an unknown error: ${errorKey}`,

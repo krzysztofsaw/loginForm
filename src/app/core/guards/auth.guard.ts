@@ -6,10 +6,10 @@ import { AuthService } from '../services/auth.service';
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
-  private readonly router = inject(Router);
-  private readonly authService = inject(AuthService);
+  private readonly router: Router = inject(Router);
+  private readonly authService: AuthService = inject(AuthService);
 
-  canActivate(): boolean | UrlTree {
+  public canActivate(): boolean | UrlTree {
     return (
       this.authService.isLoggedIn() || this.router.createUrlTree(['/login'])
     );

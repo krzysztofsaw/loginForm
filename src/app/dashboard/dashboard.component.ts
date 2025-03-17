@@ -10,8 +10,8 @@ import { catchError, of, switchMap } from 'rxjs';
   styleUrl: './dashboard.component.scss',
 })
 export class DashboardComponent implements OnInit {
-  private authService = inject(AuthService);
-  private userService = inject(UserService);
+  private authService: AuthService = inject(AuthService);
+  private userService: UserService = inject(UserService);
 
   public userData: User | null = null;
 

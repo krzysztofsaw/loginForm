@@ -7,7 +7,7 @@ import { User } from '../../models/user.model';
   providedIn: 'root',
 })
 export class UserService {
-  private readonly http = inject(HttpClient);
+  private readonly http: HttpClient = inject(HttpClient);
 
   public getUserByEmail(email: string): Observable<User | undefined> {
     return this.http

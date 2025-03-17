@@ -17,8 +17,8 @@ import { AuthService } from '../core/services/auth.service';
   styleUrl: './login-form.component.scss',
 })
 export class LoginFormComponent {
-  private fb = inject(FormBuilder);
-  private authService = inject(AuthService);
+  private fb: FormBuilder = inject(FormBuilder);
+  private authService: AuthService = inject(AuthService);
 
   public loginFailed = signal<boolean>(false);
 
