@@ -1,0 +1,16 @@
+<div class="form-group">
+  <label>{{ label }}</label>
+  <input
+    [type]="type"
+    [placeholder]="placeholder"
+    [value]="value"
+    [disabled]="disabled"
+    (input)="onInput($event)"
+    class="form-control"
+  />
+  @if (control?.invalid && control?.touched) {
+    @for (errorMessage of errorMessages(); track errorMessage) {
+      <div class="error">{{ errorMessage }}</div>
+    }
+  }
+</div>

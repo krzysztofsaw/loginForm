@@ -1,30 +1,21 @@
 <div class="login-container">
   <h1>Login</h1>
   <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <div class="form-group">
-      <label for="email">E-mail address:</label>
-      <input
-        id="email"
-        type="email"
-        formControlName="email"
-        placeholder="Enter your e-mail"
-      />
-      <app-text-input-error [control]="loginForm.get('email')" label="Email" />
-    </div>
+    <app-text-input
+      formControlName="email"
+      label="E-mail address"
+      type="email"
+      placeholder="Enter your e-mail"
+      [control]="loginForm.get('email')"
+    />
 
-    <div class="form-group">
-      <label for="password">Password:</label>
-      <input
-        id="password"
-        type="password"
-        formControlName="password"
-        placeholder="Enter your password"
-      />
-      <app-text-input-error
-        [control]="loginForm.get('password')"
-        label="Password"
-      />
-    </div>
+    <app-text-input
+      formControlName="password"
+      label="Password"
+      type="password"
+      placeholder="Enter your password"
+      [control]="loginForm.get('password')"
+    />
 
     <button type="submit" [disabled]="loginForm.invalid">Login</button>
   </form>

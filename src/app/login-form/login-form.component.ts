@@ -7,12 +7,12 @@ import {
   ValidationErrors,
   Validators,
 } from '@angular/forms';
-import { TextInputErrorComponent } from '../shared/components/text-input-error/text-input-error.component';
 import { AuthService } from '../core/services/auth.service';
+import { TextInputComponent } from '../shared/components/text-input/text-input.component';
 
 @Component({
   selector: 'app-login-form',
-  imports: [ReactiveFormsModule, TextInputErrorComponent],
+  imports: [ReactiveFormsModule, TextInputComponent],
   templateUrl: './login-form.component.html',
   styleUrl: './login-form.component.scss',
 })
